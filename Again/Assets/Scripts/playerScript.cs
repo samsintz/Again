@@ -25,7 +25,8 @@ public class playerScript : MonoBehaviour {
 		delayAmount = 0.03f;
 		pulseDelay = 0.1f;
 		gameOver = false;
-		scoreRender.text = "";
+		scoreRender.text = "wait for it";
+		StartCoroutine (openingSequence (4f));
 
 		spawnController = GameObject.Find ("spawnController");
 		spawnScript = spawnController.GetComponent<spawnScript>();
@@ -52,10 +53,21 @@ public class playerScript : MonoBehaviour {
 		if (!gameOver) {
 			score ++;
 			
-			//reduce delay every orb until delay is 0.7 s
-			if (spawnScript.spawnDelay > 0.7f) {
+			//reduce delay every orb until delay is 0.6 s
+			if (spawnScript.spawnDelay > 0.6f) {
 				spawnScript.spawnDelay -= delayAmount;
+				Debug.Log (spawnScript.spawnDelay);
 			}
+			/*if(spawnScript.spawnDelay > 1) {
+				spawnScript.spawnDelay -= Mathf.Log (spawnScript.spawnDelay, 10f);
+				Debug.Log (spawnScript.spawnDelay);
+			}
+			else {
+				if (spawnScript.spawnDelay > 0.5f) {
+					spawnScript.spawnDelay -= delayAmount;
+					Debug.Log (spawnScript.spawnDelay);
+				}
+			}*/
 			//display score
 			scoreRender.text = score.ToString();
 			//pulse triangle
@@ -86,5 +98,10 @@ public class playerScript : MonoBehaviour {
 	IEnumerator fadeOut() {
 		yield return new WaitForSeconds(1.3f);
 		Application.LoadLevel (2);
+	}
+
+	IEnumerator openingSequence(float seconds) {
+		yield return new WaitForSeconds (seconds);
+		scoreRender.text = "";
 	}
 }
