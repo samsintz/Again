@@ -4,7 +4,7 @@ using System.Collections;
 public class spawnScript : MonoBehaviour {
 
 	public GameObject orb;
-	public float spawnDelay = 2f;
+	public float spawnDelay = 1.5f;
 	private Transform spawn1;
 	private Transform spawn2;
 	private Transform spawn3;
